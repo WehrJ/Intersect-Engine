@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.Threading; // PATCH: Single Instance
 
 namespace Intersect.Client
 {
@@ -25,6 +26,15 @@ namespace Intersect.Client
         [STAThread]
         public static void Main()
         {
+
+            // PATCH: Single Instance
+            var created = false;
+            var mutex = new Mutex(true, "YourGameName", out created);
+
+            if (!created)
+                return;
+            // PATCH: Single Instance
+
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
             CosturaUtility.Initialize();
 
