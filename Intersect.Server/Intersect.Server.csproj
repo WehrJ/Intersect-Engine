@@ -433,6 +433,7 @@
     <Compile Include="Database\PlayerData\Players\Bag.cs" />
     <Compile Include="Database\PlayerData\Players\BagSlot.cs" />
     <Compile Include="Database\PlayerData\Players\BankSlot.cs" />
+    <Compile Include="Database\PlayerData\Players\Factions.cs" />
     <Compile Include="Database\PlayerData\Players\Friend.cs" />
     <Compile Include="Database\PlayerData\Players\HotbarSlot.cs" />
     <Compile Include="Database\PlayerData\Players\InventorySlot.cs" />
@@ -480,6 +481,10 @@
     <Compile Include="Entities\Pathfinding\SpatialAStar.cs" />
     <Compile Include="Entities\Pathfinding\PathfinderTarget.cs" />
     <Compile Include="Entities\Pathfinding\PriorityQueue.cs" />
+    <Compile Include="Migrations\20201111_Factions.cs" />
+    <Compile Include="Migrations\20201111_Factions.designer.cs">
+      <DependentUpon>20201111_Factions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Networking\Client.cs" />
     <Compile Include="Entities\Npc.cs" />
     <Compile Include="Networking\Helpers\NetDebug.cs" />

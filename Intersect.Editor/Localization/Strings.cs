@@ -1392,7 +1392,24 @@ Tick timer saved in server config.json.";
 
         }
 
-        public struct EventCommandList
+        public struct EventJoinFaction
+        {
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)] 
+            public static LocalizedString Cancel = @"Cancel";
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString SelectVariable = @"Player Variable containing Faction name:";
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString Okay = @"Ok";
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString Title = @"Join Faction";
+
+        }
+
+    public struct EventCommandList
         {
 
             public static LocalizedString addvariable = @"Add {00}";
@@ -1663,6 +1680,18 @@ Tick timer saved in server config.json.";
 
             public static LocalizedString whenoption = @"When [{00}]";
 
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString joinfaction = @"Join Faction [Player Variable {00} as name]";
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString joinedfaction = @"Joined Faction succesfully";
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString factionfailed = @"Join Faction Failed.";
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString endfactionjoin = @"End Join Faction";
+
         }
 
         public struct EventCommands
@@ -1728,6 +1757,8 @@ Tick timer saved in server config.json.";
                 {"changenamecolor", @"Change Name Color"},
                 {"inputvariable", @"Input Variable"},
                 {"changeplayerlabel", @"Change Player Label"},
+                {"factions", @"Factions"},
+                {"joinfaction", @"Join Faction"},
             };
 
         }

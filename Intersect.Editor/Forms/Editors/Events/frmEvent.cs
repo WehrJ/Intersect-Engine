@@ -718,7 +718,9 @@ namespace Intersect.Editor.Forms.Editors.Events
                     break;
                 case EventCommandType.ShowPlayer:
                     tmpCommand = new ShowPlayerCommand();
-
+                    break;
+                case EventCommandType.JoinFaction:
+                    tmpCommand = new JoinFactionCommand(CurrentPage.CommandLists);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -1296,7 +1298,9 @@ namespace Intersect.Editor.Forms.Editors.Events
                     break;
                 case EventCommandType.EndQuest:
                     cmdWindow = new EventCommandEndQuest((EndQuestCommand) command, this);
-
+                    break;
+                case EventCommandType.JoinFaction:
+                    cmdWindow = new EventCommandJoinFaction((JoinFactionCommand)command, CurrentPage, this);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

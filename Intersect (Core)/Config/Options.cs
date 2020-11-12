@@ -56,6 +56,8 @@ namespace Intersect
 
         [JsonProperty("Loot")] public LootOptions LootOpts = new LootOptions();
 
+        [JsonProperty("Faction")] public FactionOptions FactionOpts = new FactionOptions();
+
         public SpriteOptions Sprites = new SpriteOptions();
 
         [JsonProperty("Npc")] public NpcOptions NpcOpts = new NpcOptions();
@@ -175,6 +177,9 @@ namespace Intersect
         public static CombatOptions Combat => Instance.CombatOpts;
 
         [NotNull]
+        public static FactionOptions Faction => Instance.FactionOpts;
+
+        [NotNull]
         public static MapOptions Map => Instance.MapOpts;
 
         public static bool Loaded => Instance != null;
@@ -279,7 +284,7 @@ namespace Intersect
 
         public const int MaxHotbar = 10;
 
-        public const string DEFAULT_GAME_NAME = "Intersect";
+        public const string DEFAULT_GAME_NAME = "World of Destiny";
 
         public const int DEFAULT_SERVER_PORT = 5400;
 

@@ -638,7 +638,7 @@ namespace Intersect.Server.Networking
                         cmd = Strings.Chat.partycmd;
 
                         break;
-
+                        
                     case 3: //admin
                         cmd = Strings.Chat.admincmd;
 

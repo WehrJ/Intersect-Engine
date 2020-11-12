@@ -36,7 +36,9 @@ namespace Intersect.Client.Entities
 
             Name,
 
-            ChatBubble
+            ChatBubble,
+
+            Faction
 
         }
 
@@ -1422,6 +1424,29 @@ namespace Intersect.Client.Entities
                     y = GetLabelLocation(LabelType.Header) - 4;
 
                     break;
+                case LabelType.Faction:
+                                        // ???? This should never NOT run on a player ????
+                                        if (this is Player player)
+                                            {
+                                                if (string.IsNullOrWhiteSpace(player.Faction))
+                                                    {
+                                                        return GetLabelLocation(LabelType.Name);
+                                                    }
+                        
+                                                // Do we have a header? If so, slightly change the position!
+                                                if (string.IsNullOrWhiteSpace(HeaderLabel.Text))
+                                                    {
+                            y = GetLabelLocation(LabelType.Name);
+                                                    }
+                                                else
+                                                    {
+                            y = GetLabelLocation(LabelType.Header);
+                                                    }
+                        
+                        var factionSize = Graphics.Renderer.MeasureText(player.Faction, Graphics.EntityNameFont, 1);
+                        y -= factionSize.Y;
+                                            }
+                                        break;
             }
 
             return y;

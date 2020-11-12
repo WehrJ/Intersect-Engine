@@ -117,6 +117,9 @@ namespace Intersect.Server.Entities
         [NotMapped, JsonIgnore]
         public long ClientMoveTimer { get; set; }
 
+        // Factions
+        public Faction Faction { get; set; }
+
         public static Player FindOnline(Guid id)
         {
             return OnlinePlayers.ContainsKey(id) ? OnlinePlayers[id] : null;
@@ -1114,7 +1117,7 @@ namespace Intersect.Server.Entities
             var friendly = spell?.Combat != null && spell.Combat.Friendly;
             switch (entity)
             {
-                case Player player when friendly != player.InParty(this):
+                case Player player when friendly != player.InParty(this) || player.Faction.Name == this.Faction.Name:
                 case Resource _ when spell != null:
                     return false;
                 case Npc npc:

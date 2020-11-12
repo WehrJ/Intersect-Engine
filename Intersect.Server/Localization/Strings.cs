@@ -1282,6 +1282,20 @@ namespace Intersect.Server.Localization
             public readonly LocalizedString initialized = @"UPnP Service Initialization Succeeded";
 
         }
+        public sealed class FactionsNamespace : LocaleNamespace
+        {
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public readonly LocalizedString VariableNoText = @"A faction name can not be empty!";
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public readonly LocalizedString VariableNotMatchLength = @"A faction name needs to be between {00} and {01} characters!";
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public readonly LocalizedString AlreadyInFaction = @"You are already in a Faction!";
+
+            [NotNull, JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public readonly LocalizedString Welcome = @"Welcome to {00}!";
+        }
 
         #region Serialization
 
@@ -1416,6 +1430,8 @@ namespace Intersect.Server.Localization
 
             [NotNull] public readonly UpnpNamespace Upnp = new UpnpNamespace();
 
+            [NotNull] public readonly FactionsNamespace Faction = new FactionsNamespace();
+
         }
 
         // ReSharper restore MemberHidesStaticFromOuterClass
@@ -1520,7 +1536,8 @@ namespace Intersect.Server.Localization
 
         [NotNull]
         public static UpnpNamespace Upnp => Root.Upnp;
-
+        [NotNull]
+        public static FactionsNamespace Factions => Root.Faction;
         #endregion
 
     }

@@ -180,6 +180,20 @@ namespace Intersect.Server.Migrations
                     b.ToTable("Player_Friends");
                 });
 
+            modelBuilder.Entity("Intersect.Server.Database.PlayerData.Players.Faction", b =>
+                {
+                b.Property<Guid>("Id")
+                                        .ValueGeneratedOnAdd();
+                
+                b.Property<DateTime>("FoundingDate");
+                
+                b.Property<string>("Name");
+                
+                b.HasKey("Id");
+                
+                b.ToTable("Factions");
+                                });
+
             modelBuilder.Entity("Intersect.Server.Database.PlayerData.Players.HotbarSlot", b =>
                 {
                     b.Property<Guid>("Id")
@@ -343,6 +357,8 @@ namespace Intersect.Server.Migrations
 
                     b.Property<int>("Gender");
 
+                    b.Property<Guid?>("FactionId");
+
                     b.Property<string>("HeaderLabelJson")
                         .HasColumnName("HeaderLabel");
 
@@ -385,6 +401,8 @@ namespace Intersect.Server.Migrations
                     b.Property<int>("Z");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FactionId");
 
                     b.HasIndex("UserId");
 
@@ -498,6 +516,10 @@ namespace Intersect.Server.Migrations
 
             modelBuilder.Entity("Intersect.Server.Entities.Player", b =>
                 {
+                    b.HasOne("Intersect.Server.Database.PlayerData.Players.Faction", "Faction")
+                        .WithMany("Members")
+                        .HasForeignKey("FactionId");
+
                     b.HasOne("Intersect.Server.Database.PlayerData.User", "User")
                         .WithMany("Players")
                         .HasForeignKey("UserId")

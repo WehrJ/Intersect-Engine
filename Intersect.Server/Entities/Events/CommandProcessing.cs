@@ -10,6 +10,8 @@ using Intersect.GameObjects.Events;
 using Intersect.GameObjects.Events.Commands;
 using Intersect.GameObjects.Switches_and_Variables;
 using Intersect.Server.Database;
+using Intersect.Server.Database.PlayerData;
+using Intersect.Server.Database.PlayerData.Players;
 using Intersect.Server.Database.PlayerData.Security;
 using Intersect.Server.General;
 using Intersect.Server.Localization;
@@ -1167,6 +1169,78 @@ namespace Intersect.Server.Entities.Events
         )
         {
             player.CompleteQuest(command.QuestId, command.SkipCompletionEvent);
+        }
+        //Join Faction Command
+        private static void ProcessCommand(
+            JoinFactionCommand command,
+            Player player,
+            Event instance,
+            CommandInstance stackInfo,
+            Stack<CommandInstance> callStack
+        )
+        {
+            var success = false;
+            var playerVariable = PlayerVariableBase.Get(command.VariableId);
+
+            // We only accept Strings as our Faction Names!
+            if (playerVariable.Type == VariableDataTypes.String)
+            {
+                // Get our intended faction name
+                var fname = player.GetVariable(playerVariable.Id)?.Value.String?.Trim();
+
+                // Can we use this name?
+                if (!string.IsNullOrEmpty(fname))
+                {
+                    // Is the player already in a faction?
+                    if (player.Faction == null)
+                    {
+                        // Finally, we can actually MAKE this faction happen!
+                        var faction = new Faction(player, fname);
+                        PlayerContext.Current.Factions.Add(faction);
+                        player.Faction = faction;
+
+                        // Send them a welcome message!
+                        PacketSender.SendChatMsg(player, Strings.Factions.Welcome.ToString(fname), CustomColors.Alerts.Success);
+
+                        // Denote that we were successful.
+                        success = true;
+                    }
+                    else
+                    {
+                        // This cheeky bugger is already in a faction, tell him so!
+                        PacketSender.SendChatMsg(player, Strings.Factions.AlreadyInFaction, CustomColors.Alerts.Error);
+                    }
+                }
+                else
+                {
+                    // Let our player know they need to adjust their name.
+                    PacketSender.SendChatMsg(player, Strings.Factions.VariableNoText, CustomColors.Alerts.Error);
+                }
+            }
+            else
+            {
+                // Notify the user that something went wrong, the user really shouldn't see this.. Assuming the creator set up his events properly.
+               
+            }
+
+            List<EventCommand> newCommandList = null;
+            if (success && stackInfo.Page.CommandLists.ContainsKey(command.BranchIds[0]))
+            {
+                newCommandList = stackInfo.Page.CommandLists[command.BranchIds[0]];
+            }
+
+            if (!success && stackInfo.Page.CommandLists.ContainsKey(command.BranchIds[1]))
+            {
+                newCommandList = stackInfo.Page.CommandLists[command.BranchIds[1]];
+            }
+
+            var tmpStack = new CommandInstance(stackInfo.Page)
+            {
+                CommandList = newCommandList,
+                CommandIndex = 0,
+            };
+
+            callStack.Push(tmpStack);
         }
 
         private static Stack<CommandInstance> LoadLabelCallstack(string label, EventPage currentPage)

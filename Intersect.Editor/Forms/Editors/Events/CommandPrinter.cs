@@ -432,6 +432,71 @@ namespace Intersect.Editor.Forms.Editors.Events
                             };
 
                             mCommandProperties.Add(clp);
+                            break;
+                        case EventCommandType.JoinFaction:
+                            var gld = (JoinFactionCommand)commandList[i];
+                            lstEventCommands.Items.Add(
+                            indent +
+                            Strings.EventCommandList.linestart +
+                            GetCommandText((dynamic)commandList[i], map)
+                                                        );
+                            
+                            clp = new CommandListProperties
+                            {
+                                Editable = true,
+                                MyIndex = i,
+                                MyList = commandList,
+                                Cmd = commandList[i],
+                                Type = commandList[i].Type
+                                                        };
+                            
+                            mCommandProperties.Add(clp);
+                            
+                                                        //When the joined to Faction successfully:
+                            lstEventCommands.Items.Add(indent + "      : " + Strings.EventCommandList.joinedfaction);
+                            clp = new CommandListProperties
+                            {
+                                Editable = false,
+                                MyIndex = i,
+                                MyList = commandList,
+                                Type = commandList[i].Type,
+                                Cmd = commandList[i]
+                                                        };
+                            
+                            mCommandProperties.Add(clp);
+                            PrintCommandList(
+                            page, page.CommandLists[gld.BranchIds[0]], indent + "          ", lstEventCommands,
+                            mCommandProperties, map
+                                                        );
+                            
+                                                        //When the not joined to faction for any reason:
+                            lstEventCommands.Items.Add(indent + "      : " + Strings.EventCommandList.factionfailed);
+                            clp = new CommandListProperties
+                            {
+                                Editable = false,
+                                MyIndex = i,
+                                MyList = commandList,
+                                Type = commandList[i].Type,
+                                Cmd = commandList[i]
+                                                        };
+                            
+                            mCommandProperties.Add(clp);
+                            PrintCommandList(
+                            page, page.CommandLists[gld.BranchIds[1]], indent + "          ", lstEventCommands,
+                            mCommandProperties, map
+                                                        );
+                            
+                            lstEventCommands.Items.Add(indent + "      : " + Strings.EventCommandList.endfactionjoin);
+                            clp = new CommandListProperties
+                            {
+                                Editable = false,
+                                MyIndex = i,
+                                MyList = commandList,
+                                Type = commandList[i].Type,
+                                Cmd = commandList[i]
+                                                        };
+                            
+                            mCommandProperties.Add(clp);
 
                             break;
                         default:
@@ -1027,8 +1092,13 @@ namespace Intersect.Editor.Forms.Editors.Events
             );
         }
 
-        //Set Variable Modification Texts
-        private static string GetVariableModText(SetVariableCommand command, VariableMod mod)
+        private static string GetCommandText(JoinFactionCommand command, MapInstance map)
+        {
+            return Strings.EventCommandList.joinfaction.ToString(PlayerVariableBase.GetName(command.VariableId));
+        }
+
+    //Set Variable Modification Texts
+    private static string GetVariableModText(SetVariableCommand command, VariableMod mod)
         {
             return Strings.EventCommandList.invalid;
         }

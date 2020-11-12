@@ -140,6 +140,9 @@ namespace Intersect.Editor.Forms.Editors.Events
             treeNode54,
             treeNode55,
             treeNode56});
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("Join Factions");
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("Factions", new System.Windows.Forms.TreeNode[] {
+            treeNode58});
             this.lblName = new System.Windows.Forms.Label();
             this.txtEventname = new DarkUI.Controls.DarkTextBox();
             this.grpEntityOptions = new DarkUI.Controls.DarkGroupBox();
@@ -961,6 +964,11 @@ namespace Intersect.Editor.Forms.Editors.Events
             treeNode56.Text = "Open Crafting Station";
             treeNode57.Name = "shopandbank";
             treeNode57.Text = "Shop and Bank";
+            treeNode58.Name = "joinfaction";
+            treeNode58.Tag = "51";
+            treeNode58.Text = "Join Faction";
+            treeNode59.Name = "factions";
+            treeNode59.Text = "Factions";
             this.lstCommands.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode5,
             treeNode13,
@@ -969,7 +977,8 @@ namespace Intersect.Editor.Forms.Editors.Events
             treeNode47,
             treeNode51,
             treeNode53,
-            treeNode57});
+            treeNode57,
+            treeNode59});
             this.lstCommands.Size = new System.Drawing.Size(445, 440);
             this.lstCommands.TabIndex = 2;
             this.lstCommands.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.lstCommands_NodeMouseDoubleClick);

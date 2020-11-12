@@ -300,6 +300,9 @@ namespace Intersect.Server.Database.PlayerData
                     .ThenInclude(c => c.Spells)
                     .Include(p => p.Players)
                     .ThenInclude(c => c.Bank)
+                    .Include(p => p.Players)
+                    .ThenInclude(c => c.Faction)
+                    .ThenInclude(f => f.Members)
                     .FirstOrDefault()
             ) ??
             throw new InvalidOperationException();
@@ -326,6 +329,9 @@ namespace Intersect.Server.Database.PlayerData
                     .ThenInclude(c => c.Spells)
                     .Include(p => p.Players)
                     .ThenInclude(c => c.Bank)
+                    .Include(p => p.Players)
+                    .ThenInclude(c => c.Faction)
+                    .ThenInclude(f => f.Members)
                     .FirstOrDefault()
             ) ??
             throw new InvalidOperationException();
