@@ -529,7 +529,7 @@ namespace Intersect.Client.Entities
                     {
                         if (WalkFrame > 0 && WalkFrame / SpriteFrames < 0.7f)
                         {
-                            WalkFrame = (int)SpriteFrames / 2;
+                            WalkFrame = 0;
                         }
                         else
                         {
