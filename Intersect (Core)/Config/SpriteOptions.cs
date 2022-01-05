@@ -15,12 +15,12 @@ namespace Intersect.Config
         /// <summary>
         /// Defines the number of frames there will be in normal (walking) sprite sheets
         /// </summary>
-        public int NormalFrames = 4;
+        public int NormalFrames = 9;
 
         /// <summary>
         /// Defines the number of frames there will be in casting sprite sheets
         /// </summary>
-        public int CastFrames = 4;
+        public int CastFrames = 7;
 
         /// <summary>
         /// Defines the number of frames there will be in attacking sprite sheets
@@ -30,17 +30,17 @@ namespace Intersect.Config
         /// <summary>
         /// Defines the number of frames there will be in shooting sprite sheets
         /// </summary>
-        public int ShootFrames = 4;
+        public int ShootFrames = 7;
 
         /// <summary>
         /// Defines the number of frames there will be in weapon attacking sprite sheets
         /// </summary>
-        public int WeaponFrames = 4;
+        public int WeaponFrames = 6;
 
         /// <summary>
         /// The frame on the normal sprite sheet to show when attacking when there is no designated sheet for attack.
         /// </summary>
-        public int NormalSheetAttackFrame = 3;
+        public int NormalSheetAttackFrame = 6;
 
         /// <summary>
         /// The frame on the normal sprite sheet to show when dashing or sliding.

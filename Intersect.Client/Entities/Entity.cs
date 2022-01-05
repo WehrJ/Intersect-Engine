@@ -1775,7 +1775,7 @@ namespace Intersect.Client.Entities
                         SpriteAnimation = SpriteAnimations.Cast;
                     }
 
-                    if (spell.SpellType == SpellTypes.CombatSpell &&
+                   if (spell.SpellType == SpellTypes.CombatSpell &&
                         spell.Combat.TargetType == SpellTargetTypes.Projectile && AnimatedTextures[SpriteAnimations.Shoot] != null)
                     {
                         SpriteAnimation = SpriteAnimations.Shoot;
